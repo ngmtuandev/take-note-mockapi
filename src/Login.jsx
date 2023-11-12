@@ -62,15 +62,32 @@ export default function Login() {
   };
 
   return (
-    <View>
-      <Text>Login</Text>
+    <View
+      style={{
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "100px",
+      }}
+    >
+      <Text
+        style={{
+          fontWeight: "bold",
+          fontSize: "20px",
+          marginBottom: "40px",
+          color: "red",
+        }}
+      >
+        LOGIN FOR START USE !!!
+      </Text>
       <View>
-        <View>
+        <View style={{ marginBottom: "30px" }}>
+          <Text>User name</Text>
           <TextInput
             onChangeText={(value) => setLogin({ ...login, user_name: value })}
             style={{
               width: "300px",
-              marginTop: "30px",
+              marginTop: "5px",
               paddingLeft: "5px",
               borderRadius: "10px",
               borderWidth: "1px",
@@ -80,12 +97,13 @@ export default function Login() {
             placeholder="user name"
           ></TextInput>
         </View>
-        <View>
+        <View style={{ marginBottom: "30px" }}>
+          <Text>Password</Text>
           <TextInput
             onChangeText={(value) => setLogin({ ...login, pass: value })}
             style={{
               width: "300px",
-              marginTop: "30px",
+              marginTop: "5px",
               paddingLeft: "5px",
               borderRadius: "10px",
               borderWidth: "1px",
@@ -96,10 +114,37 @@ export default function Login() {
           ></TextInput>
         </View>
       </View>
-      {showErr && <ShowErr text={"Info your not exit"}></ShowErr>}
-      <View>
-        <TouchableOpacity onPress={handleLogin}>
-          <Text>Login</Text>
+      {showErr && <ShowErr text={"Info your not exit !!!"}></ShowErr>}
+      <View style={{ marginTop: "30px" }}>
+        <TouchableOpacity
+          style={{
+            width: "100px",
+            height: "30px",
+            backgroundColor: "red",
+            display: "flex",
+            justifyContent: "center",
+            alignContent: "center",
+            borderRadius: "20px",
+            alignItems: "center",
+          }}
+          onPress={handleLogin}
+        >
+          <Text style={{ color: "white", fontWeight: "bold" }}>Login</Text>
+        </TouchableOpacity>
+      </View>
+      <View
+        style={{
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "10px",
+        }}
+      >
+        <Text>Your not hava account ?</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+          <Text style={{ fontWeight: "bold", color: "red" }}>
+            Click Register
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

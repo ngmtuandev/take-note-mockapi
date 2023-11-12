@@ -103,8 +103,8 @@ const NoteHome = () => {
   };
 
   const handleLogout = async () => {
-    await AsyncStorage.removeItem("user");
     navigation.navigate("Login");
+    await AsyncStorage.removeItem("user");
   };
 
   return (
@@ -129,27 +129,31 @@ const NoteHome = () => {
         }}
       >
         <View>
+          <Text>{`Task your:`}</Text>
           <TextInput
             style={{
               borderWidth: "2px",
               height: "35px",
               width: "350px",
-              marginTop: "20px",
+              marginTop: "10px",
               marginBottom: "20px",
               borderRadius: "20px",
+              paddingLeft: "8px",
             }}
             value={task}
             onChangeText={(value) => setTask(value)}
           ></TextInput>
         </View>
         <View>
+          <Text>{`Priority(1: very, 2: medium, 3: normal)):`}</Text>
           <TextInput
             style={{
               borderWidth: "2px",
               height: "35px",
               width: "350px",
-              marginTop: "20px",
+              marginTop: "10px",
               marginBottom: "20px",
+              paddingLeft: "8px",
               borderRadius: "20px",
             }}
             value={priority}
@@ -181,20 +185,64 @@ const NoteHome = () => {
                   marginTop: "30px",
                   padding: "10px",
                   width: "350px",
-                  height: "110px",
+                  height: "130px",
                   backgroundColor: `${el.status ? "black" : "green"}`,
                   marginBottom: "20px",
                   borderRadius: "10px",
                   shadowOffset: "#2196F3",
                 }}
               >
-                <Text style={{ color: "white", fontWeight: "bold" }}>
-                  {el?.name_task}
-                </Text>
-                <Text style={{ color: "white", fontWeight: "bold" }}>
-                  Status : {el?.status ? "Hoàn thành" : "Chưa hoàn thành"}
-                </Text>
-                <View style={{ flexDirection: "row", marginTop: "20px" }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginBottom: "10px",
+                  }}
+                >
+                  <View>
+                    <Text style={{ color: "white", fontWeight: "bold" }}>
+                      {el?.name_task}
+                    </Text>
+                    <Text style={{ color: "white", fontWeight: "bold" }}>
+                      Status : {el?.status ? "Hoàn thành" : "Chưa hoàn thành"}
+                    </Text>
+                  </View>
+                  <View>
+                    {+el?.priority === 1 ? (
+                      <View
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          marginTop: "5px",
+                          borderRadius: "2px",
+                          backgroundColor: "red",
+                        }}
+                      ></View>
+                    ) : +el?.priority === 2 ? (
+                      <View
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          marginTop: "5px",
+                          borderRadius: "2px",
+                          backgroundColor: "yellow",
+                        }}
+                      ></View>
+                    ) : (
+                      <View
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          marginTop: "5px",
+                          borderRadius: "2px",
+                          backgroundColor: "white",
+                        }}
+                      ></View>
+                    )}
+                  </View>
+                </View>
+
+                <View style={{ flexDirection: "row", marginTop: "10px" }}>
                   <View style={{ marginRight: "10px" }}>
                     <TouchableOpacity
                       style={{
