@@ -7,6 +7,10 @@ import Login from "./src/Login";
 import NoteHome from "./src/NoteHome";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import NoteWithRedux from "./src/NoteWithRedux";
+import reducerTasks from "./src/store/reducer";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -19,35 +23,40 @@ export default function App() {
       }
     })();
   }, []);
+
+  const store = createStore(reducerTasks);
+
   return (
-    <NavigationContainer>
-      {isLogin ? (
-        <Stack.Navigator initialRouteName="NoteHome">
-          <Stack.Screen
-            name="Notehome"
-            component={NoteHome}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
-      ) : (
-        <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen
-            name="Register"
-            options={{ headerShown: false }}
-            component={Register}
-          />
-          <Stack.Screen
-            name="Login"
-            options={{ headerShown: false }}
-            component={Login}
-          />
-          <Stack.Screen
-            name="Notehome"
-            component={NoteHome}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
-      )}
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        {isLogin ? (
+          <Stack.Navigator initialRouteName="NoteHome">
+            <Stack.Screen
+              name="Notehome"
+              component={NoteWithRedux}
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+        ) : (
+          <Stack.Navigator initialRouteName="Login">
+            <Stack.Screen
+              name="Register"
+              options={{ headerShown: false }}
+              component={Register}
+            />
+            <Stack.Screen
+              name="Login"
+              options={{ headerShown: false }}
+              component={Login}
+            />
+            <Stack.Screen
+              name="Notehome"
+              component={NoteWithRedux}
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+        )}
+      </NavigationContainer>
+    </Provider>
   );
 }
